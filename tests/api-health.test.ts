@@ -3,6 +3,7 @@ import { createServer } from "node:http";
 import { describe, expect, it } from "vitest";
 import request from "supertest";
 import { GET } from "@/app/api/health/route";
+import { healthResponseSchema } from "@/lib/api/health-schema";
 
 function createRequestFromNode(req: IncomingMessage) {
   const url = `http://localhost${req.url ?? "/"}`;
@@ -29,9 +30,13 @@ describe("GET /api/health", () => {
       .get("/api/health")
       .expect(200)
       .expect((res: request.Response) => {
-        expect(res.body.status).toBe("ok");
-        expect(res.body.service).toBe("supabase-boilerplate");
-        expect(res.body.timestamp).toBeDefined();
+        const parsed = healthResponseSchema.safeParse(res.body);
+        expect(parsed.success).toBe(true);
+        if (parsed.success) {
+          expect(parsed.data.status).toBe("ok");
+          expect(parsed.data.service).toBe("supabase-boilerplate");
+          expect(parsed.data.timestamp).toBeDefined();
+        }
       });
 
     server.close();
