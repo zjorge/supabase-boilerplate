@@ -10,6 +10,12 @@ A production-ready reference implementation demonstrating database-first archite
 - **Security:** Row Level Security (RLS) + JWT-based authorization
 - **Deployment:** Vercel (frontend) + Supabase (backend)
 
+## CI Workflow
+
+GitHub Actions runs linting, type-checking, unit tests, and build on every PR and push to `main`.
+
+Workflow file: `.github/workflows/ci.yml`
+
 This is a reference implementation for database-first systems where the backend is treated as product infrastructure rather than a thin persistence layer.
 
 Most production code I work on lives under NDA. This repo exists to make my decision-making explicit and reproducible.
