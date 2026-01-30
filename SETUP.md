@@ -164,6 +164,21 @@ supabase db push
 supabase db reset
 ```
 
+## Unit Testing
+
+This repo uses Vitest + Testing Library with mock data for UI components.
+
+```bash
+# Run tests in watch mode
+pnpm test
+
+# Open Vitest UI
+pnpm test:ui
+
+# Run coverage report
+pnpm test:coverage
+```
+
 ## Testing RLS Policies
 
 You can test RLS policies in the Supabase SQL Editor:
